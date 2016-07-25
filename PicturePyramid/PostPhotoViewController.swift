@@ -9,14 +9,46 @@
 import UIKit
 import AVFoundation
 
-class PostPhotoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
-
+ class PostPhotoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    var chosenImage: UIImage!
+    
     @IBOutlet weak var cameraView: UIView!
     
     @IBAction func unwindToPostPhotoViewController(segue: UIStoryboardSegue) {
         
         
+    }
+    
+    @IBAction func testing(sender: AnyObject) {
+            }
+    @IBOutlet weak var testing: UIButton!
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        print("we have our image")
+        self.dismissViewControllerAnimated(true) { (nil) in
+            print("running")
+            self.performSegueWithIdentifier("goToConfirm", sender: self)
+            }
+        chosenImage = image
+        print("finland")
+        
+        
+    }
+    @IBAction func hitUpload(sender: AnyObject) {
+        selectPicture()
+        print("we are here")
+       
+    }
+    func selectPicture() {
+        let picker = UIImagePickerController()
+        picker.allowsEditing = false
+        picker.delegate = self
+        presentViewController(picker, animated: true, completion: nil)
+    }
+    
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     var captureSession : AVCaptureSession?
@@ -32,6 +64,23 @@ class PostPhotoViewController: UIViewController, UIImagePickerControllerDelegate
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+        if (segue.identifier == "goToConfirm") {
+            let navVC = segue.destinationViewController as! UINavigationController
+
+            let svc = navVC.viewControllers.first as! confirmPostViewController;
+            
+            if chosenImage != nil{
+                print("not empty here")
+            }else{
+                print("empty")
+            }
+            
+            svc.toPass = chosenImage
+            
+        }
+    }
+
     
     
     override func viewDidAppear(animated: Bool) {

@@ -17,6 +17,11 @@
 		EB5B3BFC1D4143590066D4A9 /* PostPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5B3BFB1D4143590066D4A9 /* PostPhotoViewController.swift */; };
 		EB5B3BFE1D4143680066D4A9 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5B3BFD1D4143680066D4A9 /* FriendsViewController.swift */; };
 		EB9C813B1D427D6B005C1A89 /* FrontCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9C813A1D427D6B005C1A89 /* FrontCameraViewController.swift */; };
+		EBE2DE6A1D467DA700E67FBC /* ParseLoginHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE2DE691D467DA700E67FBC /* ParseLoginHelper.swift */; };
+		EBE2DE6D1D4681CB00E67FBC /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE2DE6C1D4681CB00E67FBC /* ErrorHandler.swift */; };
+		EBE3948F1D43EEE500B82325 /* confirmPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE3948E1D43EEE500B82325 /* confirmPostViewController.swift */; };
+		EBF40FBA1D454775002D5D81 /* FriendSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF40FB91D454775002D5D81 /* FriendSearchTableViewCell.swift */; };
+		EBF40FBC1D45B667002D5D81 /* ParseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF40FBB1D45B667002D5D81 /* ParseHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +39,11 @@
 		EB5B3BFB1D4143590066D4A9 /* PostPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostPhotoViewController.swift; sourceTree = "<group>"; };
 		EB5B3BFD1D4143680066D4A9 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		EB9C813A1D427D6B005C1A89 /* FrontCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrontCameraViewController.swift; sourceTree = "<group>"; };
+		EBE2DE691D467DA700E67FBC /* ParseLoginHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseLoginHelper.swift; sourceTree = "<group>"; };
+		EBE2DE6C1D4681CB00E67FBC /* ErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
+		EBE3948E1D43EEE500B82325 /* confirmPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confirmPostViewController.swift; sourceTree = "<group>"; };
+		EBF40FB91D454775002D5D81 /* FriendSearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendSearchTableViewCell.swift; sourceTree = "<group>"; };
+		EBF40FBB1D45B667002D5D81 /* ParseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,12 +96,14 @@
 		EB521C941D41277C006A678F /* PicturePyramid */ = {
 			isa = PBXGroup;
 			children = (
+				EBE2DE6B1D4681A900E67FBC /* Helpers */,
 				EB5B3BF61D413E3F0066D4A9 /* ViewControllers */,
 				EB521C951D41277C006A678F /* AppDelegate.swift */,
 				EB521C991D41277C006A678F /* Main.storyboard */,
 				EB521C9C1D41277C006A678F /* Assets.xcassets */,
 				EB521C9E1D41277C006A678F /* LaunchScreen.storyboard */,
 				EB521CA11D41277C006A678F /* Info.plist */,
+				EBF40FB91D454775002D5D81 /* FriendSearchTableViewCell.swift */,
 			);
 			path = PicturePyramid;
 			sourceTree = "<group>";
@@ -104,8 +116,19 @@
 				EB5B3BFB1D4143590066D4A9 /* PostPhotoViewController.swift */,
 				EB5B3BFD1D4143680066D4A9 /* FriendsViewController.swift */,
 				EB9C813A1D427D6B005C1A89 /* FrontCameraViewController.swift */,
+				EBE3948E1D43EEE500B82325 /* confirmPostViewController.swift */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		EBE2DE6B1D4681A900E67FBC /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				EBF40FBB1D45B667002D5D81 /* ParseHelper.swift */,
+				EBE2DE691D467DA700E67FBC /* ParseLoginHelper.swift */,
+				EBE2DE6C1D4681CB00E67FBC /* ErrorHandler.swift */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,10 +255,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB5B3BF81D413E700066D4A9 /* FeedViewController.swift in Sources */,
+				EBE2DE6A1D467DA700E67FBC /* ParseLoginHelper.swift in Sources */,
 				EB9C813B1D427D6B005C1A89 /* FrontCameraViewController.swift in Sources */,
 				EB5B3BFE1D4143680066D4A9 /* FriendsViewController.swift in Sources */,
+				EBE2DE6D1D4681CB00E67FBC /* ErrorHandler.swift in Sources */,
+				EBF40FBA1D454775002D5D81 /* FriendSearchTableViewCell.swift in Sources */,
 				EB521C961D41277C006A678F /* AppDelegate.swift in Sources */,
+				EBF40FBC1D45B667002D5D81 /* ParseHelper.swift in Sources */,
 				EB5B3BFA1D4143460066D4A9 /* SettingsViewController.swift in Sources */,
+				EBE3948F1D43EEE500B82325 /* confirmPostViewController.swift in Sources */,
 				EB5B3BFC1D4143590066D4A9 /* PostPhotoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -354,7 +382,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PicturePyramid/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = bassilshama.PicturePyramid;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bassilshama.PicturePyramid;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -369,7 +397,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PicturePyramid/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = bassilshama.PicturePyramid;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bassilshama.PicturePyramid;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
