@@ -129,6 +129,8 @@ extension FriendsViewController {
 extension FriendsViewController: UISearchBarDelegate {
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        
+
         searchBar.setShowsCancelButton(true, animated: true)
         state = .SearchMode
     }
@@ -142,6 +144,7 @@ extension FriendsViewController: UISearchBarDelegate {
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         ParseHelper.searchUsers(searchText, completionBlock:updateList)
+        state = .SearchMode
     }
     
 }

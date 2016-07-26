@@ -81,7 +81,12 @@ class ParseHelper {
         
         return query
     }
-    
+    static func findFollowing() -> PFQuery {
+        let query = PFQuery(className: ParseFollowClass)
+        query.whereKey(ParseFollowToUser, equalTo: PFUser.currentUser()!)
+        query.findObjectsInBackgroundWithBlock(nil)
+        return query
+    }
     /**
      Fetch users whose usernames match the provided search term.
      

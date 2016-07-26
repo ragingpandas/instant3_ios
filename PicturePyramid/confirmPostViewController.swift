@@ -7,9 +7,16 @@
 //
 
 import UIKit
+import Parse
+import Foundation
+import Bond
+import Darwin
 
 class confirmPostViewController: UIViewController {
     var toPass: UIImage!
+
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("made it to check")
@@ -23,7 +30,31 @@ class confirmPostViewController: UIViewController {
     
     
     @IBAction func postButton(sender: AnyObject) {
-        
+        let found = ParseHelper.findFollowing()
+        let numberOfFollowers = found.countObjects(nil)
+        if numberOfFollowers > 4{
+            let post = Post()
+            post.image = toPass
+            post["user"] = PFUser.currentUser()
+            post["passedOn"] = 0
+            post["likes"] = 0
+            post["sentFrom"] = PFUser.currentUser()
+            let follower1Int = Int(arc4random_uniform(UInt32(numberOfFollowers)))
+            var follower2Int = Int(arc4random_uniform(UInt32(numberOfFollowers)))
+            if follower2Int == follower1Int{
+                while follower2Int == follower1Int{
+                    follower2Int = Int(arc4random_uniform(UInt32(numberOfFollowers)))
+                }
+            }
+            var follower3Int = Int(arc4random_uniform(UInt32(numberOfFollowers)))
+            if follower3Int == follower2Int || follower3Int == follower1Int{
+                while follower3Int == follower2Int || follower3Int == follower1Int{
+                    follower3Int = Int(arc4random_uniform(UInt32(numberOfFollowers)))
+                }
+            }
+            post.uploadPost()
+            
+        }
     }
     
     
@@ -33,6 +64,7 @@ class confirmPostViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
 
     /*
@@ -46,3 +78,4 @@ class confirmPostViewController: UIViewController {
     */
 
 }
+
