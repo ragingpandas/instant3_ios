@@ -12,10 +12,11 @@ import Foundation
 import Bond
 import Darwin
 
+
 class confirmPostViewController: UIViewController {
     var toPass: UIImage!
-
-    
+    var found: [PFUser] = []
+    static var foundFollowers: [PFUser] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,18 +24,33 @@ class confirmPostViewController: UIViewController {
         if toPass != nil{
             print("image is here")
         }
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
         imageView.image = toPass
 
                 // Do any additional setup after loading the view.
     }
     
+    @IBOutlet weak var titleTextField: UITextField!
     
     @IBAction func postButton(sender: AnyObject) {
-        let found = ParseHelper.findFollowing()
-        let numberOfFollowers = found.countObjects(nil)
+        print("Post Button Hit")
+        
+
+        found = ParseHelper.findFollowing(arrayDone)
+        
+        
+        print(found)
+    }
+    func arrayDone(){
+        found = confirmPostViewController.foundFollowers
+
+        let numberOfFollowers = found.count
+        
+        
+        print(numberOfFollowers)
         if numberOfFollowers > 4{
             let post = Post()
-            post.image = toPass
             post["user"] = PFUser.currentUser()
             post["passedOn"] = 0
             post["likes"] = 0
@@ -52,9 +68,91 @@ class confirmPostViewController: UIViewController {
                     follower3Int = Int(arc4random_uniform(UInt32(numberOfFollowers)))
                 }
             }
+            post["follower1"] = found[follower1Int]
+            post["follower2"] = found[follower2Int]
+            post["follower3"] = found[follower3Int]
+            post["follower1HasSeen"] = false
+            post["follower2HasSeen"] = false
+            post["follower3HasSeen"] = false
+            
+            
+            let currentDate = NSDate()
+            
+            let currentDateComponents = NSDateComponents()
+            
+            currentDateComponents.timeZone = NSTimeZone(abbreviation: "GMT")
+            
+            var hoursToAdd: Int = 0
+            var minutesToAdd: Int = 0
+            
+            if numberOfFollowers < 11{
+                
+                minutesToAdd = 0
+                hoursToAdd = 24
+                
+            }else if numberOfFollowers < 26{
+                
+                minutesToAdd = 0
+                hoursToAdd = 12
+                
+            }else if numberOfFollowers < 51{
+                
+                minutesToAdd = 0
+                hoursToAdd = 6
+                
+            }else if numberOfFollowers < 101{
+                
+                minutesToAdd = 0
+                hoursToAdd = 2
+                
+            }else if numberOfFollowers < 251{
+                
+                hoursToAdd = 1
+                
+            }else if numberOfFollowers < 501{
+                
+                minutesToAdd = 30
+                
+            }else{
+                
+                minutesToAdd = 15
+                
+            }
+            
+            
+            currentDateComponents.hour = hoursToAdd
+            currentDateComponents.minute = minutesToAdd
+            
+            let calculatedDate = NSCalendar.currentCalendar().dateByAddingComponents(currentDateComponents, toDate: currentDate, options: NSCalendarOptions.init(rawValue: 0))
+            
+            post["follower1Expire"] = calculatedDate
+            post["follower2Expire"] = calculatedDate
+            post["follower3Expire"] = calculatedDate
+            var title = titleTextField.text
+            if title == ""{
+                title = "No Title"
+            }
+            
+            post["title"] = title
+            
+            post.image = toPass
+            print("before upload post")
             post.uploadPost()
+            self.performSegueWithIdentifier("sharePostUnwind", sender: self)
+            
+            print("after upload post")
+        }else{
+            let notEnoughFollowers = UIAlertController(title: "Not Enough Followers!", message: "You need at least 5 followers to post something!", preferredStyle: .Alert)
+            let ok = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:{
+                (_)in
+                self.performSegueWithIdentifier("sharePostUnwind", sender: self)
+            })
+            
+            notEnoughFollowers.addAction(ok)
+            self.presentViewController(notEnoughFollowers, animated: true, completion: nil)
             
         }
+
     }
     
     
@@ -65,7 +163,10 @@ class confirmPostViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
 
     /*
     // MARK: - Navigation
@@ -76,6 +177,10 @@ class confirmPostViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    class func finishedGettingFollowers (followers: [PFUser]) {
+        print("finishedGettingFollowers: \(followers)")
+        confirmPostViewController.foundFollowers = followers
+    }
 
 }
 

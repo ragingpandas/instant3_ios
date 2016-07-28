@@ -9,14 +9,13 @@
 import Foundation
 import Parse
 
-
 class ParseHelper {
     static let ParseFollowClass       = "follow"
     static let ParseFollowFromUser    = "fromUser"
     static let ParseFollowToUser      = "toUser"
     static let ParseUserUsername      = "username"
     static let ParseUserProfilePicture = "profilePicture"
-    
+
     static func getFollowingUsersForUser(user: PFUser, completionBlock: PFQueryArrayResultBlock) {
         let query = PFQuery(className: ParseFollowClass)
         
@@ -81,11 +80,26 @@ class ParseHelper {
         
         return query
     }
-    static func findFollowing() -> PFQuery {
+    static func findFollowing(completion: () -> ()) -> [PFUser] {
+        var userArray: [PFUser] = [PFUser]()
+
         let query = PFQuery(className: ParseFollowClass)
         query.whereKey(ParseFollowToUser, equalTo: PFUser.currentUser()!)
-        query.findObjectsInBackgroundWithBlock(nil)
-        return query
+        print(PFUser.currentUser()) 
+        query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
+            if let objects = objects {
+                for users in objects{
+                    userArray.append(users.objectForKey("toUser") as! PFUser)
+           
+                }
+            }
+            print(userArray)
+            confirmPostViewController.finishedGettingFollowers(userArray)
+            completion()
+        }
+        
+        return userArray
+        
     }
     /**
      Fetch users whose usernames match the provided search term.
