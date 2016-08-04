@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4346B72FCE3C5DF9122F009E /* Pods_PicturePyramid.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61A7C1CE45191793E607866D /* Pods_PicturePyramid.framework */; };
 		EB03BA441D47FCEC00F05D60 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB03BA431D47FCEC00F05D60 /* Post.swift */; };
+		EB0B683D1D52823900FE541A /* KolodaPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0B683C1D52823900FE541A /* KolodaPost.swift */; };
 		EB521C961D41277C006A678F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB521C951D41277C006A678F /* AppDelegate.swift */; };
 		EB521C9B1D41277C006A678F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB521C991D41277C006A678F /* Main.storyboard */; };
 		EB521C9D1D41277C006A678F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB521C9C1D41277C006A678F /* Assets.xcassets */; };
@@ -17,12 +18,21 @@
 		EB5B3BFA1D4143460066D4A9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5B3BF91D4143460066D4A9 /* SettingsViewController.swift */; };
 		EB5B3BFC1D4143590066D4A9 /* PostPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5B3BFB1D4143590066D4A9 /* PostPhotoViewController.swift */; };
 		EB5B3BFE1D4143680066D4A9 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5B3BFD1D4143680066D4A9 /* FriendsViewController.swift */; };
+		EB68FF471D4FE43300BB3C05 /* BackgroundAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB68FF401D4FE43300BB3C05 /* BackgroundAnimationViewController.swift */; };
+		EB68FF481D4FE43300BB3C05 /* BackgroundKolodaAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB68FF411D4FE43300BB3C05 /* BackgroundKolodaAnimator.swift */; };
+		EB68FF491D4FE43300BB3C05 /* CustomKolodaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB68FF421D4FE43300BB3C05 /* CustomKolodaView.swift */; };
+		EB68FF4A1D4FE43300BB3C05 /* CustomOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB68FF431D4FE43300BB3C05 /* CustomOverlayView.swift */; };
+		EB68FF4B1D4FE43300BB3C05 /* CustomOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB68FF441D4FE43300BB3C05 /* CustomOverlayView.xib */; };
+		EB68FF4C1D4FE43300BB3C05 /* ExampleOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB68FF451D4FE43300BB3C05 /* ExampleOverlayView.swift */; };
+		EB68FF4D1D4FE43300BB3C05 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB68FF461D4FE43300BB3C05 /* ViewController.swift */; };
+		EB68FF4F1D4FE86000BB3C05 /* Koloda.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB68FF4E1D4FE86000BB3C05 /* Koloda.storyboard */; };
 		EB9C813B1D427D6B005C1A89 /* FrontCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9C813A1D427D6B005C1A89 /* FrontCameraViewController.swift */; };
 		EBE2DE6A1D467DA700E67FBC /* ParseLoginHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE2DE691D467DA700E67FBC /* ParseLoginHelper.swift */; };
 		EBE2DE6D1D4681CB00E67FBC /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE2DE6C1D4681CB00E67FBC /* ErrorHandler.swift */; };
 		EBE3948F1D43EEE500B82325 /* confirmPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE3948E1D43EEE500B82325 /* confirmPostViewController.swift */; };
 		EBF40FBA1D454775002D5D81 /* FriendSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF40FB91D454775002D5D81 /* FriendSearchTableViewCell.swift */; };
 		EBF40FBC1D45B667002D5D81 /* ParseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF40FBB1D45B667002D5D81 /* ParseHelper.swift */; };
+		EBF518D41D5160D800079B6C /* BigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF518D31D5160D800079B6C /* BigViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +40,7 @@
 		61A7C1CE45191793E607866D /* Pods_PicturePyramid.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PicturePyramid.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7EFB7A2744548B07A960B66 /* Pods-PicturePyramid.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PicturePyramid.release.xcconfig"; path = "Pods/Target Support Files/Pods-PicturePyramid/Pods-PicturePyramid.release.xcconfig"; sourceTree = "<group>"; };
 		EB03BA431D47FCEC00F05D60 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		EB0B683C1D52823900FE541A /* KolodaPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KolodaPost.swift; sourceTree = "<group>"; };
 		EB521C921D41277C006A678F /* PicturePyramid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PicturePyramid.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB521C951D41277C006A678F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB521C9A1D41277C006A678F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -40,12 +51,21 @@
 		EB5B3BF91D4143460066D4A9 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		EB5B3BFB1D4143590066D4A9 /* PostPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostPhotoViewController.swift; sourceTree = "<group>"; };
 		EB5B3BFD1D4143680066D4A9 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		EB68FF401D4FE43300BB3C05 /* BackgroundAnimationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundAnimationViewController.swift; sourceTree = "<group>"; };
+		EB68FF411D4FE43300BB3C05 /* BackgroundKolodaAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundKolodaAnimator.swift; sourceTree = "<group>"; };
+		EB68FF421D4FE43300BB3C05 /* CustomKolodaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomKolodaView.swift; sourceTree = "<group>"; };
+		EB68FF431D4FE43300BB3C05 /* CustomOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomOverlayView.swift; sourceTree = "<group>"; };
+		EB68FF441D4FE43300BB3C05 /* CustomOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomOverlayView.xib; sourceTree = "<group>"; };
+		EB68FF451D4FE43300BB3C05 /* ExampleOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleOverlayView.swift; sourceTree = "<group>"; };
+		EB68FF461D4FE43300BB3C05 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EB68FF4E1D4FE86000BB3C05 /* Koloda.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Koloda.storyboard; sourceTree = "<group>"; };
 		EB9C813A1D427D6B005C1A89 /* FrontCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrontCameraViewController.swift; sourceTree = "<group>"; };
 		EBE2DE691D467DA700E67FBC /* ParseLoginHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseLoginHelper.swift; sourceTree = "<group>"; };
 		EBE2DE6C1D4681CB00E67FBC /* ErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		EBE3948E1D43EEE500B82325 /* confirmPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confirmPostViewController.swift; sourceTree = "<group>"; };
 		EBF40FB91D454775002D5D81 /* FriendSearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendSearchTableViewCell.swift; sourceTree = "<group>"; };
 		EBF40FBB1D45B667002D5D81 /* ParseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseHelper.swift; sourceTree = "<group>"; };
+		EBF518D31D5160D800079B6C /* BigViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +118,13 @@
 		EB521C941D41277C006A678F /* PicturePyramid */ = {
 			isa = PBXGroup;
 			children = (
+				EB68FF4E1D4FE86000BB3C05 /* Koloda.storyboard */,
+				EB68FF411D4FE43300BB3C05 /* BackgroundKolodaAnimator.swift */,
+				EB68FF421D4FE43300BB3C05 /* CustomKolodaView.swift */,
+				EB68FF431D4FE43300BB3C05 /* CustomOverlayView.swift */,
+				EB68FF441D4FE43300BB3C05 /* CustomOverlayView.xib */,
+				EB68FF451D4FE43300BB3C05 /* ExampleOverlayView.swift */,
+				EB68FF461D4FE43300BB3C05 /* ViewController.swift */,
 				EBE2DE6B1D4681A900E67FBC /* Helpers */,
 				EB5B3BF61D413E3F0066D4A9 /* ViewControllers */,
 				EB521C951D41277C006A678F /* AppDelegate.swift */,
@@ -114,12 +141,14 @@
 		EB5B3BF61D413E3F0066D4A9 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				EB68FF401D4FE43300BB3C05 /* BackgroundAnimationViewController.swift */,
 				EB5B3BF71D413E700066D4A9 /* FeedViewController.swift */,
 				EB5B3BF91D4143460066D4A9 /* SettingsViewController.swift */,
 				EB5B3BFB1D4143590066D4A9 /* PostPhotoViewController.swift */,
 				EB5B3BFD1D4143680066D4A9 /* FriendsViewController.swift */,
 				EB9C813A1D427D6B005C1A89 /* FrontCameraViewController.swift */,
 				EBE3948E1D43EEE500B82325 /* confirmPostViewController.swift */,
+				EBF518D31D5160D800079B6C /* BigViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -130,6 +159,7 @@
 				EBF40FBB1D45B667002D5D81 /* ParseHelper.swift */,
 				EBE2DE691D467DA700E67FBC /* ParseLoginHelper.swift */,
 				EBE2DE6C1D4681CB00E67FBC /* ErrorHandler.swift */,
+				EB0B683C1D52823900FE541A /* KolodaPost.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -197,7 +227,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB521CA01D41277C006A678F /* LaunchScreen.storyboard in Resources */,
+				EB68FF4F1D4FE86000BB3C05 /* Koloda.storyboard in Resources */,
 				EB521C9D1D41277C006A678F /* Assets.xcassets in Resources */,
+				EB68FF4B1D4FE43300BB3C05 /* CustomOverlayView.xib in Resources */,
 				EB521C9B1D41277C006A678F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,13 +289,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB68FF4C1D4FE43300BB3C05 /* ExampleOverlayView.swift in Sources */,
 				EB5B3BF81D413E700066D4A9 /* FeedViewController.swift in Sources */,
 				EBE2DE6A1D467DA700E67FBC /* ParseLoginHelper.swift in Sources */,
+				EB0B683D1D52823900FE541A /* KolodaPost.swift in Sources */,
 				EB9C813B1D427D6B005C1A89 /* FrontCameraViewController.swift in Sources */,
+				EB68FF491D4FE43300BB3C05 /* CustomKolodaView.swift in Sources */,
 				EB03BA441D47FCEC00F05D60 /* Post.swift in Sources */,
 				EB5B3BFE1D4143680066D4A9 /* FriendsViewController.swift in Sources */,
 				EBE2DE6D1D4681CB00E67FBC /* ErrorHandler.swift in Sources */,
 				EBF40FBA1D454775002D5D81 /* FriendSearchTableViewCell.swift in Sources */,
+				EB68FF471D4FE43300BB3C05 /* BackgroundAnimationViewController.swift in Sources */,
+				EB68FF481D4FE43300BB3C05 /* BackgroundKolodaAnimator.swift in Sources */,
+				EB68FF4A1D4FE43300BB3C05 /* CustomOverlayView.swift in Sources */,
+				EB68FF4D1D4FE43300BB3C05 /* ViewController.swift in Sources */,
+				EBF518D41D5160D800079B6C /* BigViewController.swift in Sources */,
 				EB521C961D41277C006A678F /* AppDelegate.swift in Sources */,
 				EBF40FBC1D45B667002D5D81 /* ParseHelper.swift in Sources */,
 				EB5B3BFA1D4143460066D4A9 /* SettingsViewController.swift in Sources */,

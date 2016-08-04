@@ -51,9 +51,15 @@ class confirmPostViewController: UIViewController {
         print(numberOfFollowers)
         if numberOfFollowers > 4{
             let post = Post()
+            let likesClass = PFObject(className: "likes")
+            likesClass["numberOfLikes"] = 0
+            likesClass.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+                post["likes"] = likesClass
+            }
+
             post["user"] = PFUser.currentUser()
             post["passedOn"] = 0
-            post["likes"] = 0
+            
             post["sentFrom"] = PFUser.currentUser()
             let follower1Int = Int(arc4random_uniform(UInt32(numberOfFollowers)))
             var follower2Int = Int(arc4random_uniform(UInt32(numberOfFollowers)))
@@ -135,7 +141,7 @@ class confirmPostViewController: UIViewController {
             
             post["title"] = title
             
-            post.image = toPass
+            post.image.value = toPass
             print("before upload post")
             post.uploadPost()
             self.performSegueWithIdentifier("sharePostUnwind", sender: self)

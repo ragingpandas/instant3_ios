@@ -10,6 +10,6 @@ target ‘PicturePyramid’ do
   pod 'Parse'
   pod 'ParseFacebookUtilsV4'
   pod 'ParseUI'
-
+  pod "Koloda"
 
 end

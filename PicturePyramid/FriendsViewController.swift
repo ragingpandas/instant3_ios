@@ -24,8 +24,8 @@ class FriendsViewController: UIViewController {
     
     /*
      This is a local cache. It stores all the users this user is following.
-     It is used to update the UI immediately upon user interaction, instead of
-     having to wait for a server response.
+     It is used to update the UI immediately upon user interaction, instead of waiting
+     for a server response.
      */
     var followingUsers: [PFUser]? {
         didSet {
@@ -41,7 +41,6 @@ class FriendsViewController: UIViewController {
     var query: PFQuery? {
         didSet {
             // whenever we assign a new query, cancel any previous requests
-            // you can use oldValue to access the previous value of the property
             oldValue?.cancel()
         }
     }
@@ -60,6 +59,7 @@ class FriendsViewController: UIViewController {
                 query = ParseHelper.allUsers(updateList)
                 
             case .SearchMode:
+                print("search mode")
                 let searchText = searchBar?.text ?? ""
                 query = ParseHelper.searchUsers(searchText, completionBlock:updateList)
             }
@@ -73,6 +73,11 @@ class FriendsViewController: UIViewController {
      As soon as a query completes, this method updates the Table View.
      */
     func updateList(results: [PFObject]?, error: NSError?) {
+        print("updating list")
+        if let error = error {
+            ErrorHandling.defaultErrorHandler(error)
+        }
+        
         self.users = results as? [PFUser] ?? []
         self.searchTableView.reloadData()
         
@@ -84,9 +89,15 @@ class FriendsViewController: UIViewController {
         super.viewWillAppear(animated)
         
         state = .DefaultMode
+        searchBar.showsCancelButton = true
+        searchBar.delegate = self
         
         // fill the cache of a user's followees
-        ParseHelper.getFollowingUsersForUser(PFUser.currentUser()!) { (results: [PFObject]?, error: NSError?) -> Void in
+        ParseHelper.getFollowingUsersForUser(PFUser.currentUser()!) {
+            (results: [PFObject]?, error: NSError?) -> Void in
+            if let error = error {
+                ErrorHandling.defaultErrorHandler(error)
+            }
             let relations = results ?? []
             // use map to extract the User from a Follow object
             self.followingUsers = relations.map {
@@ -100,14 +111,14 @@ class FriendsViewController: UIViewController {
 
 // MARK: TableView Data Source
 
-extension FriendsViewController {
+extension FriendsViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.users?.count ?? 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = searchTableView.dequeueReusableCellWithIdentifier("UserCell") as! FriendSearchTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("UserCell") as! FriendSearchTableViewCell
         
         let user = users![indexPath.row]
         cell.user = user
@@ -129,8 +140,6 @@ extension FriendsViewController {
 extension FriendsViewController: UISearchBarDelegate {
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        
-
         searchBar.setShowsCancelButton(true, animated: true)
         state = .SearchMode
     }
@@ -144,7 +153,6 @@ extension FriendsViewController: UISearchBarDelegate {
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         ParseHelper.searchUsers(searchText, completionBlock:updateList)
-        state = .SearchMode
     }
     
 }
@@ -166,15 +174,13 @@ extension FriendsViewController: FriendSearchTableViewCellDelegate {
             self.followingUsers = followingUsers.filter({$0 != user})
         }
     }
+    
+}
 
-    /*
-    // MARK: - Navigation
+// MARK: Style
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+extension FriendsViewController {
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
     }
-    */
-
 }

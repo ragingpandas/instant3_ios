@@ -15,13 +15,11 @@ class ParseHelper {
     static let ParseFollowToUser      = "toUser"
     static let ParseUserUsername      = "username"
     static let ParseUserProfilePicture = "profilePicture"
+    
+    static var posts1: [Post] = []
+    static var posts2: [Post] = []
+    static var posts3: [Post] = []
 
-    static func getFollowingUsersForUser(user: PFUser, completionBlock: PFQueryArrayResultBlock) {
-        let query = PFQuery(className: ParseFollowClass)
-        
-        query.whereKey(ParseFollowFromUser, equalTo:user)
-        query.findObjectsInBackgroundWithBlock(completionBlock)
-    }
     
     /**
      Establishes a follow relationship between two users.
@@ -29,34 +27,6 @@ class ParseHelper {
      :param: user    The user that is following
      :param: toUser  The user that is being followed
      */
-    static func addFollowRelationshipFromUser(user: PFUser, toUser: PFUser) {
-        let followObject = PFObject(className: ParseFollowClass)
-        followObject.setObject(user, forKey: ParseFollowFromUser)
-        followObject.setObject(toUser, forKey: ParseFollowToUser)
-        
-        followObject.saveInBackgroundWithBlock(nil)
-    }
-    
-    /**
-     Deletes a follow relationship between two users.
-     
-     :param: user    The user that is following
-     :param: toUser  The user that is being followed
-     */
-    static func removeFollowRelationshipFromUser(user: PFUser, toUser: PFUser) {
-        let query = PFQuery(className: ParseFollowClass)
-        query.whereKey(ParseFollowFromUser, equalTo:user)
-        query.whereKey(ParseFollowToUser, equalTo: toUser)
-        
-        query.findObjectsInBackgroundWithBlock { (results: [PFObject]?, error: NSError?) -> Void in
-            
-            let results = results ?? []
-            
-            for follow in results {
-                follow.deleteInBackgroundWithBlock(nil)
-            }
-        }
-    }
     
     // MARK: Users
     
@@ -80,6 +50,37 @@ class ParseHelper {
         
         return query
     }
+    
+    /**
+     Fetch users whose usernames match the provided search term.
+     
+     :param: searchText The text that should be used to search for users
+     :param: completionBlock The completion block that is called when the query completes
+     
+     :returns: The generated PFQuery
+     */
+    static func searchUsers(searchText: String, completionBlock: PFQueryArrayResultBlock)
+        -> PFQuery {
+            /*
+             NOTE: We are using a Regex to allow for a case insensitive compare of usernames.
+             Regex can be slow on large datasets. For large amount of data it's better to store
+             lowercased username in a separate column and perform a regular string compare.
+             */
+            let query = PFUser.query()!.whereKey(ParseHelper.ParseUserUsername,
+                                                 matchesRegex: searchText, modifiers: "i")
+            
+            query.whereKey(ParseHelper.ParseUserUsername,
+                           notEqualTo: PFUser.currentUser()!.username!)
+            
+            query.orderByAscending(ParseHelper.ParseUserUsername)
+            query.limit = 20
+            
+            query.findObjectsInBackgroundWithBlock(completionBlock)
+            
+            return query
+    }
+    
+
     static func findFollowing(completion: () -> ()) -> [PFUser] {
         var userArray: [PFUser] = [PFUser]()
 
@@ -89,7 +90,7 @@ class ParseHelper {
         query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
             if let objects = objects {
                 for users in objects{
-                    userArray.append(users.objectForKey("toUser") as! PFUser)
+                    userArray.append(users.objectForKey("fromUser") as! PFUser)
            
                 }
             }
@@ -101,6 +102,20 @@ class ParseHelper {
         return userArray
         
     }
+    
+    static func timelineRequestForCurrentUser(followerIndex followerIndex: Int, completionBlock: PFQueryArrayResultBlock) {
+        let followingQuery = PFQuery(className: "follow")
+        followingQuery.whereKey("fromUser", equalTo:PFUser.currentUser()!)
+        
+        // 2
+        let postsFromFollowedUsers = Post.query()
+        postsFromFollowedUsers!.whereKey("follower\(followerIndex)", equalTo: PFUser.currentUser()!)
+        //        let followerQuery = Post.query()
+        postsFromFollowedUsers!.whereKey("follower\(followerIndex)HasSeen", equalTo: false)
+        //        let query = PFQuery.orQueryWithSubqueries([followerQuery!, postsFromFollowedUsers!])
+        postsFromFollowedUsers!.findObjectsInBackgroundWithBlock(completionBlock)
+    }
+
     /**
      Fetch users whose usernames match the provided search term.
      
@@ -109,25 +124,114 @@ class ParseHelper {
      
      :returns: The generated PFQuery
      */
-    static func searchUsers(searchText: String, completionBlock: PFQueryArrayResultBlock) -> PFQuery {
-        /*
-         NOTE: We are using a Regex to allow for a case insensitive compare of usernames.
-         Regex can be slow on large datasets. For large amount of data it's better to store
-         lowercased username in a separate column and perform a regular string compare.
-         */
-        let query = PFUser.query()!.whereKey(ParseHelper.ParseUserUsername,
-                                             matchesRegex: searchText, modifiers: "i")
+//    static func pullFromFeed1(completion: ()) {
+//        let followingQuery = PFQuery(className: ParseFollowClass)
+//        followingQuery.whereKey("fromUser", equalTo:PFUser.currentUser()!)
+//        let postsFromFollowedUsers1 = Post.query()
+//        postsFromFollowedUsers1!.whereKey("user", matchesKey: "follower1", inQuery: followingQuery)
+//        postsFromFollowedUsers1!.whereKey("false", matchesKey: "follower1HasSeen", inQuery: followingQuery)
+//        
+//        postsFromFollowedUsers1!.findObjectsInBackgroundWithBlock{ (objects: [PFObject]?, error: NSError?) -> Void in
+//            if let objects = objects {
+//                for post in objects{
+//                    posts1.append(post.objectForKey("follower1") as! Post)
+//                    
+//                }
+//            }
+//            completion
+//        }
+//    }
+//     static func pullFromFeed2(completion: ()){
+//        let followingQuery = PFQuery(className: ParseFollowClass)
+//        followingQuery.whereKey("fromUser", equalTo:PFUser.currentUser()!)
+//        let postsFromFollowedUsers2 = Post.query()
+//        postsFromFollowedUsers2!.whereKey("user", matchesKey: "follower2", inQuery: followingQuery)
+//        postsFromFollowedUsers2!.whereKey("false", matchesKey: "follower2HasSeen", inQuery: followingQuery)
+//        
+//        postsFromFollowedUsers2!.findObjectsInBackgroundWithBlock{ (objects: [PFObject]?, error: NSError?) -> Void in
+//            if let objects = objects {
+//                for post in objects{
+//                    posts2.append(post.objectForKey("follower2") as! Post)
+//                    
+//                }
+//            }
+//            completion
+//        }
+//        
+//    }
+//    static func pullFromFeed3(completion: ()){
+//        let followingQuery = PFQuery(className: ParseFollowClass)
+//        followingQuery.whereKey("fromUser", equalTo:PFUser.currentUser()!)
+//        let postsFromFollowedUsers3 = Post.query()
+//        postsFromFollowedUsers3!.whereKey("user", matchesKey: "follower3", inQuery: followingQuery)
+//        postsFromFollowedUsers3!.whereKey("false", matchesKey: "follower3HasSeen", inQuery: followingQuery)
+//        
+//        postsFromFollowedUsers3!.findObjectsInBackgroundWithBlock{ (objects: [PFObject]?, error: NSError?) -> Void in
+//            if let objects = objects {
+//                for post in objects{
+//                    posts3.append(post.objectForKey("follower3") as! Post)
+//                    
+//                }
+//            }
+//            completion
+//        }
+//    }
+//    static func returnPosts1()->[Post]{
+//        return posts1
+//    }
+//    static func returnPosts2()->[Post]{
+//        return posts2
+//    }
+//    static func returnPosts3()->[Post]{
+//        return posts3
+//    }
+    
+    static func getFollowingUsersForUser(user: PFUser, completionBlock: PFQueryArrayResultBlock) {
+        let query = PFQuery(className: ParseFollowClass)
         
-        query.whereKey(ParseHelper.ParseUserUsername,
-                       notEqualTo: PFUser.currentUser()!.username!)
-        
-        query.orderByAscending(ParseHelper.ParseUserUsername)
-        query.limit = 20
-        
+        query.whereKey(ParseFollowFromUser, equalTo:user)
         query.findObjectsInBackgroundWithBlock(completionBlock)
-        
-        return query
     }
+    
+    /**
+     Establishes a follow relationship between two users.
+     
+     :param: user    The user that is following
+     :param: toUser  The user that is being followed
+     */
+    static func addFollowRelationshipFromUser(user: PFUser, toUser: PFUser) {
+        let followObject = PFObject(className: ParseFollowClass)
+        followObject.setObject(user, forKey: ParseFollowFromUser)
+        followObject.setObject(toUser, forKey: ParseFollowToUser)
+        
+        followObject.saveInBackgroundWithBlock(ErrorHandling.errorHandlingCallback)
+    }
+    
+    /**
+     Deletes a follow relationship between two users.
+     
+     :param: user    The user that is following
+     :param: toUser  The user that is being followed
+     */
+    static func removeFollowRelationshipFromUser(user: PFUser, toUser: PFUser) {
+        let query = PFQuery(className: ParseFollowClass)
+        query.whereKey(ParseFollowFromUser, equalTo:user)
+        query.whereKey(ParseFollowToUser, equalTo: toUser)
+        
+        query.findObjectsInBackgroundWithBlock {
+            (results: [PFObject]?, error: NSError?) -> Void in
+            if let error = error {
+                ErrorHandling.defaultErrorHandler(error)
+            }
+            
+            let results = results ?? []
+            
+            for follow in results {
+                follow.deleteInBackgroundWithBlock(ErrorHandling.errorHandlingCallback)
+            }
+        }
+    }
+
 
 }
 extension PFObject {

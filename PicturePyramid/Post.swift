@@ -7,18 +7,26 @@
 //
 
 import Foundation
+
+import Bond
+import ConvenienceKit
 import Parse
 
 
 class Post : PFObject, PFSubclassing {
     
     @NSManaged var imageFile: PFFile?
+//    @NSManaged var imageFile: PFFile?
     @NSManaged var user: PFUser?
+    
+    static var imageCache: NSCacheSwift<String, UIImage>!
+    
+    var imagePulled: Observable<UIImage?> = Observable(nil)
     
     var photoUploadTask: UIBackgroundTaskIdentifier?
 
-    var image: UIImage?
-    
+    var image: Observable<UIImage?> = Observable(nil)
+
     static func parseClassName() -> String {
         return "Post"
     }
@@ -34,7 +42,7 @@ class Post : PFObject, PFSubclassing {
         }
     }
     func uploadPost() {
-        if let image = image {
+        if let image = image.value {
             guard let imageData = UIImageJPEGRepresentation(image, 0.8) else {return}
             guard let imageFile = PFFile(name: "image.jpg", data: imageData) else {return}
             
@@ -51,5 +59,22 @@ class Post : PFObject, PFSubclassing {
             }
         }
     }
-    
+    func downloadImage(onComplete: (UIImage -> Void)?) {
+        // if image is not downloaded yet, get it
+        // 1
+        if (image.value == nil) {
+            // 2
+            imageFile?.getDataInBackgroundWithBlock { (data: NSData?, error: NSError?) -> Void in
+                if let data = data {
+                    let image = UIImage(data: data, scale:1.0)!
+                    // 3
+                    self.image.value = image
+                    
+                    if let onComplete = onComplete {
+                        onComplete(image)
+                    }
+                }
+            }
+        }
+    }
 }
