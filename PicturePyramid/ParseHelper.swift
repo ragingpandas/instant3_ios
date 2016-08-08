@@ -112,6 +112,8 @@ class ParseHelper {
         postsFromFollowedUsers!.whereKey("follower\(followerIndex)", equalTo: PFUser.currentUser()!)
         //        let followerQuery = Post.query()
         postsFromFollowedUsers!.whereKey("follower\(followerIndex)HasSeen", equalTo: false)
+        postsFromFollowedUsers!.includeKey("likes")
+        postsFromFollowedUsers!.includeKey("user")
         //        let query = PFQuery.orQueryWithSubqueries([followerQuery!, postsFromFollowedUsers!])
         postsFromFollowedUsers!.findObjectsInBackgroundWithBlock(completionBlock)
     }

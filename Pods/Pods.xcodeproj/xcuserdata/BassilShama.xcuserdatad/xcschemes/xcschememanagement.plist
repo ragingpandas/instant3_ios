@@ -59,6 +59,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SwiftSpinner.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>pop.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -117,12 +122,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D185CFCC67E45B79173C43D9757C2AB3</key>
+		<key>CA43EE6C51DAFF477C3B186C41357406</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>E1F78B1C5F8F2CCD0E68552EAF2B9B52</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E77226B69E42B1602B6C9B3C3407A9EA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

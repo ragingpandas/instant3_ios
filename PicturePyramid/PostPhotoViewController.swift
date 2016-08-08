@@ -12,6 +12,10 @@ import AVFoundation
  class PostPhotoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var chosenImage: UIImage!
+
+    
+
+
     
     @IBOutlet weak var cameraView: UIView!
     
@@ -45,7 +49,7 @@ import AVFoundation
         picker.delegate = self
         presentViewController(picker, animated: true, completion: nil)
     }
-    
+//
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
@@ -120,10 +124,10 @@ import AVFoundation
                 captureSession?.startRunning()
                 
             }
-            
+        
             
         }
-        
+
     }
 
 

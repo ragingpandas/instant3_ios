@@ -18,6 +18,8 @@ class confirmPostViewController: UIViewController {
     var found: [PFUser] = []
     static var foundFollowers: [PFUser] = []
     
+    @IBOutlet weak var share: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("made it to check")
@@ -27,7 +29,7 @@ class confirmPostViewController: UIViewController {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
         imageView.image = toPass
-
+        share.enabled = true
                 // Do any additional setup after loading the view.
     }
     
@@ -36,7 +38,7 @@ class confirmPostViewController: UIViewController {
     @IBAction func postButton(sender: AnyObject) {
         print("Post Button Hit")
         
-
+        share.enabled = false
         found = ParseHelper.findFollowing(arrayDone)
         
         
@@ -144,14 +146,22 @@ class confirmPostViewController: UIViewController {
             post.image.value = toPass
             print("before upload post")
             post.uploadPost()
-            self.performSegueWithIdentifier("sharePostUnwind", sender: self)
+            let postUploaded = UIAlertController(title: "Post Uploaded", message: "Congratulations you have just uploaded your first post!", preferredStyle: .Alert)
+            let ok = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:{
+                (_)in
+                self.performSegueWithIdentifier("sharePostUnwind", sender: self)
+            })
+            
+            postUploaded.addAction(ok)
+            self.presentViewController(postUploaded, animated: true, completion: nil)
+            
             
             print("after upload post")
         }else{
             let notEnoughFollowers = UIAlertController(title: "Not Enough Followers!", message: "You need at least 5 followers to post something!", preferredStyle: .Alert)
             let ok = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:{
                 (_)in
-                self.performSegueWithIdentifier("sharePostUnwind", sender: self)
+                    self.performSegueWithIdentifier("sharePostUnwind", sender: self)
             })
             
             notEnoughFollowers.addAction(ok)

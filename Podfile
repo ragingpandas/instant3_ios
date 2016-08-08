@@ -10,6 +10,7 @@ target ‘PicturePyramid’ do
   pod 'Parse'
   pod 'ParseFacebookUtilsV4'
   pod 'ParseUI'
-  pod "Koloda"
+  pod 'Koloda', '~> 3.1.1'
+  pod ‘SwiftSpinner’
 
 end

@@ -14,7 +14,8 @@ protocol KolodaPostDelegate {
 }
 
 struct KolodaPostImage {
-    let post: KolodaPost
+    let kolodaPost: KolodaPost
+    let post: Post
     let image: UIImage
 }
 
@@ -25,7 +26,7 @@ class KolodaPost {
         var images = [KolodaPostImage]()
         
         for post in posts {
-            images.append(KolodaPostImage(post: self, image: post.image.value!))
+            images.append(KolodaPostImage(kolodaPost: self, post: post, image: post.image.value!))
         }
         
         return images
@@ -39,7 +40,7 @@ class KolodaPost {
         self.followerIndex = followerIndex
     }
     
-    func getPostsFromParse() {
+    func getPostsFromParse(completion: ()) {
         ParseHelper.timelineRequestForCurrentUser(followerIndex: self.followerIndex) { result, error in
             let posts = result as? [Post] ?? []
             
@@ -47,7 +48,7 @@ class KolodaPost {
             
             for post in self.posts {
                 post.downloadImage { image in
-                    let postImage = KolodaPostImage(post: self, image: image)
+                    let postImage = KolodaPostImage(kolodaPost: self, post: post, image: image)
                     self.delegate.didGetImage(postImage)
                 }
             }

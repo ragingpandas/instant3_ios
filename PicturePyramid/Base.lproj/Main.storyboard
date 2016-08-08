@@ -114,7 +114,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3fP-D0-YRu">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Circled User Male-100" translatesAutoresizingMaskIntoConstraints="NO" id="3fP-D0-YRu">
                                                     <rect key="frame" x="20" y="5" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="3fP-D0-YRu" secondAttribute="height" multiplier="1:1" id="FNE-YM-akx"/>
@@ -291,6 +291,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="imageView" destination="7sf-y2-LWg" id="UfA-tV-K0r"/>
+                        <outlet property="share" destination="nnW-fk-Ugb" id="VMX-7o-Q06"/>
                         <outlet property="titleTextField" destination="e1s-Y8-K88" id="oMB-OG-sgf"/>
                         <segue destination="YAv-2R-IYm" kind="unwind" identifier="sharePostUnwind" unwindAction="unwindToPostPhotoViewController:" id="hj0-ol-xmd"/>
                     </connections>
@@ -303,7 +304,7 @@
         <!--Settings View Controller-->
         <scene sceneID="JvA-Jy-dck">
             <objects>
-                <viewController id="kd1-8E-9gf" customClass="SettingsViewController" customModule="PicturePyramid" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="kd1-8E-9gf" customClass="SettingsViewController" customModule="PicturePyramid" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UfN-Qe-n5T"/>
                         <viewControllerLayoutGuide type="bottom" id="gKA-X0-uy4"/>
@@ -311,15 +312,67 @@
                     <view key="view" contentMode="scaleToFill" id="GjB-DR-JFt">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1gm-k3-FhP">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ZZT-ia-5jb">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZZT-ia-5jb" id="dPa-3f-7Gh">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="59.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Logout" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R3X-4x-RKW">
+                                                    <rect key="frame" x="58" y="11" width="54" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="R3X-4x-RKW" firstAttribute="leading" secondItem="dPa-3f-7Gh" secondAttribute="leadingMargin" constant="50" id="8aJ-KT-StT"/>
+                                                <constraint firstItem="R3X-4x-RKW" firstAttribute="centerY" secondItem="dPa-3f-7Gh" secondAttribute="centerY" id="MKH-XS-zRj"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="o0D-yY-GY9">
+                                        <rect key="frame" x="0.0" y="88" width="600" height="60"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="o0D-yY-GY9" id="CPX-hb-m3C">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="59.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change your Profile Picture" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rfp-xj-bca">
+                                                    <rect key="frame" x="58" y="19.5" width="209" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Rfp-xj-bca" firstAttribute="leading" secondItem="CPX-hb-m3C" secondAttribute="leadingMargin" constant="50" id="82k-T3-oGW"/>
+                                                <constraint firstItem="Rfp-xj-bca" firstAttribute="centerY" secondItem="CPX-hb-m3C" secondAttribute="centerY" id="Wcd-tX-Zsv"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1gm-k3-FhP" firstAttribute="leading" secondItem="GjB-DR-JFt" secondAttribute="leading" id="56b-Zn-5rw"/>
+                            <constraint firstItem="gKA-X0-uy4" firstAttribute="top" secondItem="1gm-k3-FhP" secondAttribute="bottom" id="UEe-iY-ZIa"/>
+                            <constraint firstAttribute="trailing" secondItem="1gm-k3-FhP" secondAttribute="trailing" id="V3f-Bg-w5f"/>
+                            <constraint firstItem="1gm-k3-FhP" firstAttribute="top" secondItem="UfN-Qe-n5T" secondAttribute="bottom" id="hBM-dm-3ww"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="Settings 3-100" id="yAL-jh-mAa">
-                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
-                    </tabBarItem>
+                    <navigationItem key="navigationItem" id="1GH-rv-g6D"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MQX-fS-cWe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="738" y="1604"/>
+            <point key="canvasLocation" x="1550" y="1604"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="N4g-MC-jGM">
@@ -334,7 +387,7 @@
                         <segue destination="Vlw-JU-Ke4" kind="relationship" relationship="viewControllers" id="j52-g5-qm7"/>
                         <segue destination="cLY-QH-1xO" kind="relationship" relationship="viewControllers" id="ruM-UX-yyC"/>
                         <segue destination="P5B-Lq-aYN" kind="relationship" relationship="viewControllers" id="EVq-F6-xim"/>
-                        <segue destination="kd1-8E-9gf" kind="relationship" relationship="viewControllers" id="fqv-wv-a5f"/>
+                        <segue destination="Kal-jH-VSb" kind="relationship" relationship="viewControllers" id="fqv-wv-a5f"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qx2-y2-iDr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -413,8 +466,30 @@
             </objects>
             <point key="canvasLocation" x="980" y="588"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="5ar-Bd-izs">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Kal-jH-VSb" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="Settings 3-100" id="yAL-jh-mAa">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bWl-cj-6kR">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="kd1-8E-9gf" kind="relationship" relationship="rootViewController" id="MkE-Vc-ESP"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="byt-zI-MFi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="738" y="1604"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="Circled User Male-100" width="100" height="100"/>
         <image name="Compact Camera-100" width="34" height="34"/>
         <image name="Home-100" width="34" height="34"/>
         <image name="Settings 3-100" width="34" height="34"/>
