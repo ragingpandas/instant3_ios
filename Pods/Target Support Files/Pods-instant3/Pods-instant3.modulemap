@@ -1,0 +1,6 @@
+framework module Pods_instant3 {
+  umbrella header "Pods-instant3-umbrella.h"
+
+  export *
+  module * { export * }
+}

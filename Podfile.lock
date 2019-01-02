@@ -26,6 +26,7 @@ PODS:
     - Parse (~> 1.9)
   - pop (1.0.9)
   - SwiftSpinner (0.9.5)
+  - Toucan (0.5.0)
 
 DEPENDENCIES:
   - Bond (= 4.0.0)
@@ -35,6 +36,7 @@ DEPENDENCIES:
   - ParseFacebookUtilsV4
   - ParseUI
   - SwiftSpinner
+  - Toucan
 
 SPEC CHECKSUMS:
   Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
@@ -48,7 +50,8 @@ SPEC CHECKSUMS:
   ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   SwiftSpinner: c6585a0ae5c67eb33e737695cce88f0262008cce
+  Toucan: 0519c341148252ae114c5a657d2a85bb9ada9e40
 
-PODFILE CHECKSUM: e3675a4dbe1a9bc7b1078c2e4ebc827080be898e
+PODFILE CHECKSUM: 5c085064f212a1bed95c69b9a3257c3c89a9c961
 
 COCOAPODS: 1.0.1

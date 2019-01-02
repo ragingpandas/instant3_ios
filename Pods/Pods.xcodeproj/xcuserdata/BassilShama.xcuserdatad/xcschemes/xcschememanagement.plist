@@ -54,12 +54,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-PicturePyramid.xcscheme</key>
+		<key>Pods-instant3.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>SwiftSpinner.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Toucan.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -78,6 +83,16 @@
 			<true/>
 		</dict>
 		<key>11A09A967C036AE6CFECDFEA8325FE93</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>233B80AED6DFE281F53E2D2EAB4997A7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2621C7DBC79C894D9DD45870B3B273A2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -112,6 +127,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>9BFFD2F8ECBAC26FAF44231118840E0F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>BA0ED018954B2E035A694BF72506145C</key>
 		<dict>
 			<key>primary</key>
@@ -122,17 +142,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CA43EE6C51DAFF477C3B186C41357406</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>E1F78B1C5F8F2CCD0E68552EAF2B9B52</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E77226B69E42B1602B6C9B3C3407A9EA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -1,7 +1,7 @@
 # Uncomment this line to define a global platform for your project
 platform :ios, '9.0'
 
-target ‘PicturePyramid’ do
+target ‘instant3’ do
   # Comment this line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
@@ -12,5 +12,6 @@ target ‘PicturePyramid’ do
   pod 'ParseUI'
   pod 'Koloda', '~> 3.1.1'
   pod ‘SwiftSpinner’
+  pod ‘Toucan’
 
 end
